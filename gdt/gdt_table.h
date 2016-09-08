@@ -1,6 +1,12 @@
 #ifndef GDT_TABLE_H
 #define GDT_TABLE_H
 
+#ifdef GDT_TABLE_DLL
+    #define EXPORT_DLL __declspec(dllexport)
+#else
+    #define EXPORT_DLL __declspec(dllimport)
+#endif
+
 #include "defs.h"
 
 typedef enum {
@@ -15,31 +21,31 @@ typedef union {
     const char *string;
 } gdt_value;
 
-struct __gdt_table;
-struct __gdt_table_cursor;
+struct EXPORT_DLL __gdt_table;
+struct EXPORT_DLL __gdt_table_cursor;
 
 typedef struct __gdt_table gdt_table;
 typedef struct __gdt_table_cursor gdt_table_cursor;
 
-extern gdt_table *         gdt_table_new                (int nb_rows, int nb_columns, int nb_rows_alloc);
-extern void                gdt_table_free               (gdt_table *t);
-extern int                 gdt_table_size1              (const gdt_table *t);
-extern int                 gdt_table_size2              (const gdt_table *t);
-extern gdt_value_enum      gdt_table_get                (const gdt_table *t, int i, int j, gdt_value *value);
-extern gdt_value_enum      gdt_table_get_by_name        (const gdt_table *t, int i, const char* col_name, gdt_value *value);
-extern void                gdt_table_set_number         (gdt_table *t, int i, int j, double num);
-extern void                gdt_table_set_string         (gdt_table *t, int i, int j, const char *s);
-extern void                gdt_table_set_undef          (gdt_table *t, int i, int j);
-extern const char *        gdt_table_get_header         (gdt_table *t, int j);
-extern void                gdt_table_set_header         (gdt_table *t, int j, const char *str);
-extern int                 gdt_table_header_index       (const gdt_table *t, const char* col_name);
-extern int                 gdt_table_insert_columns     (gdt_table *t, int j_in, int n);
-extern int                 gdt_table_insert_rows        (gdt_table *t, int i_in, int n);
-extern gdt_value_enum      gdt_table_cursor_get         (const gdt_table_cursor *c, const char *key, gdt_value *value);
-extern gdt_table_cursor *  gdt_table_get_cursor         (gdt_table *t);
-extern int                 gdt_table_cursor_set_number  (gdt_table_cursor *c, const char *key, double x);
-extern int                 gdt_table_cursor_set_string  (gdt_table_cursor *c, const char *key, const char *x);
-extern int                 gdt_table_cursor_set_undef   (gdt_table_cursor *c, const char *key);
-extern int                 gdt_table_cursor_set_index   (gdt_table_cursor *c, int index);
+extern gdt_table *         EXPORT_DLL gdt_table_new                (int nb_rows, int nb_columns, int nb_rows_alloc);
+extern void                EXPORT_DLL gdt_table_free               (gdt_table *t);
+extern int                 EXPORT_DLL gdt_table_size1              (const gdt_table *t);
+extern int                 EXPORT_DLL gdt_table_size2              (const gdt_table *t);
+extern gdt_value_enum      EXPORT_DLL gdt_table_get                (const gdt_table *t, int i, int j, gdt_value *value);
+extern gdt_value_enum      EXPORT_DLL gdt_table_get_by_name        (const gdt_table *t, int i, const char* col_name, gdt_value *value);
+extern void                EXPORT_DLL gdt_table_set_number         (gdt_table *t, int i, int j, double num);
+extern void                EXPORT_DLL gdt_table_set_string         (gdt_table *t, int i, int j, const char *s);
+extern void                EXPORT_DLL gdt_table_set_undef          (gdt_table *t, int i, int j);
+extern const char *        EXPORT_DLL gdt_table_get_header         (gdt_table *t, int j);
+extern void                EXPORT_DLL gdt_table_set_header         (gdt_table *t, int j, const char *str);
+extern int                 EXPORT_DLL gdt_table_header_index       (const gdt_table *t, const char* col_name);
+extern int                 EXPORT_DLL gdt_table_insert_columns     (gdt_table *t, int j_in, int n);
+extern int                 EXPORT_DLL gdt_table_insert_rows        (gdt_table *t, int i_in, int n);
+extern gdt_value_enum      EXPORT_DLL gdt_table_cursor_get         (const gdt_table_cursor *c, const char *key, gdt_value *value);
+extern gdt_table_cursor *  EXPORT_DLL gdt_table_get_cursor         (gdt_table *t);
+extern int                 EXPORT_DLL gdt_table_cursor_set_number  (gdt_table_cursor *c, const char *key, double x);
+extern int                 EXPORT_DLL gdt_table_cursor_set_string  (gdt_table_cursor *c, const char *key, const char *x);
+extern int                 EXPORT_DLL gdt_table_cursor_set_undef   (gdt_table_cursor *c, const char *key);
+extern int                 EXPORT_DLL gdt_table_cursor_set_index   (gdt_table_cursor *c, int index);
 
 #endif

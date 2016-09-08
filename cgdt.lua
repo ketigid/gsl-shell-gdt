@@ -41,4 +41,4 @@ extern int                 gdt_table_cursor_set_undef   (gdt_table_cursor *c, co
 extern int                 gdt_table_cursor_set_index   (gdt_table_cursor *c, int index);
 ]]
 
-return ffi.C
+return ffi.load('libgdt')
